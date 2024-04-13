@@ -1,0 +1,7 @@
+STA 75
+TCP 61027
+
+
+DI_REG  5 3800 	0  0      1     0  DI  @T  2
+HR_INT  1 2400  0  0   4095  1210  AO  @K 4
+DO_REG  2 4900  0  0      1     0  DO  @I 2
