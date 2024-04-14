@@ -32,7 +32,6 @@ namespace Modbus.ModbusFunctions
             Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)ModbusWrite.Length)), 0, request, 4, 2);
             request[6] = ModbusWrite.UnitId;
             request[7] = ModbusWrite.FunctionCode;
-            // Difference with read pack request 
             Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)ModbusWrite.OutputAddress)), 0, request, 8, 2);
             Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)ModbusWrite.Value)), 0, request, 10, 2);
             return request;

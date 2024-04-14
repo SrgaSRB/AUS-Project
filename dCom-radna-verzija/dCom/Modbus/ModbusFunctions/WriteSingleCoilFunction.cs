@@ -36,7 +36,6 @@ namespace Modbus.ModbusFunctions
             Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)modbusWrite.Value)), 0, request, 10, 2);
 
             return request;
-
         }
 
         /// <inheritdoc />

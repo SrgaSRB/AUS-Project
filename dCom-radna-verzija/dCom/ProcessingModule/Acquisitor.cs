@@ -74,14 +74,14 @@ namespace ProcessingModule
                     if((item.RegistryType == PointType.DIGITAL_INPUT || item.RegistryType == PointType.DIGITAL_OUTPUT) && (item.SecondsPassedSinceLastPoll == digitalTime))
                     {
                         processingManager.ExecuteReadCommand(item, this.configuration.GetTransactionId(),
-                        this.configuration.UnitAddress, item.StartAddress, item.NumberOfRegisters);//okidac za citanje akvizicionih podataka
+                        this.configuration.UnitAddress, item.StartAddress, item.NumberOfRegisters);
                         item.SecondsPassedSinceLastPoll = 0;
                     }
 
                     if ((item.RegistryType == PointType.ANALOG_INPUT || item.RegistryType == PointType.ANALOG_OUTPUT) && (item.SecondsPassedSinceLastPoll == analoglTime))
                     {
                         processingManager.ExecuteReadCommand(item, this.configuration.GetTransactionId(),
-                        this.configuration.UnitAddress, item.StartAddress, item.NumberOfRegisters);//okidac za citanje akvizicionih podataka
+                        this.configuration.UnitAddress, item.StartAddress, item.NumberOfRegisters);
                         item.SecondsPassedSinceLastPoll = 0;
                     }
                     */

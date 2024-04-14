@@ -40,28 +40,23 @@ namespace Modbus.ModbusFunctions
         }
 
         /// <inheritdoc />
-        public override Dictionary<Tuple<PointType, ushort>, ushort> ParseResponse(byte[] response)//prevodimo odgovor u citljiv format,
-                                                                                                   //ogovor se salje posle pribavljanja requesta
-                                                                                                   //niz bajtova prevodi u recnik ciji je kljc par tip, adresa a vrednost je value,
-                                                                                                   //koji je dosao u tom odgovoru
+        public override Dictionary<Tuple<PointType, ushort>, ushort> ParseResponse(byte[] response)//recnik ciji je kljc par tip, adresa a vrednost je value,
         {
             ModbusReadCommandParameters modbusRead = this.CommandParameters as ModbusReadCommandParameters;
             Dictionary<Tuple<PointType, ushort>, ushort> dic = new Dictionary<Tuple<PointType, ushort>, ushort>();
-            int count = 0;//njega proveravamo da li je isti kao quantity sto je br bitova koje treba procitati iz requesta
+            int count = 0;
 
-            ushort adresa = modbusRead.StartAddress;//adresa od koje krece citanje
-
-            ushort value;//vrednost koja treba da se procita 
-            byte maska = 1;//maska zbog ocitavnja bota
+            ushort adresa = modbusRead.StartAddress;
+            ushort value;
+            byte maska = 1;
 
             for (int i = 0; i < response[8]; i++)
-            {//posto je digitalan npr 10 bitova stane u 2 bajta
-             //response[8] je br bajtova odgovora
-                byte tempByte = response[9 + i];//prvi bit u odgovoru
+            {
+                byte tempByte = response[9 + i];
                 for (int j = 0; j < 8; j++)
-                {//svaki bajt ima 8 bita i sad se pomeramo po tim bitovima kroz bajt
-                    value = (ushort)(tempByte & maska);//ako je 1 ostaje 1 ako je 0 onda bude 0, zato se and-uje
-                    tempByte >>= 1;//pomeramo se na sledeci bit u bajtu
+                {
+                    value = (ushort)(tempByte & maska);
+                    tempByte >>= 1;
                     dic.Add(new Tuple<PointType, ushort>(PointType.DIGITAL_INPUT, adresa), value);//pakujemo u recnik 
                     count++;
                     adresa++;
@@ -69,12 +64,8 @@ namespace Modbus.ModbusFunctions
                     {
                         break;
                     }
-
                 }
-
-
             }
-
             return dic;
         }
     }

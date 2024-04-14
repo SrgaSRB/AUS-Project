@@ -66,7 +66,6 @@ namespace Modbus.ModbusFunctions
                 }
             }
             return dic;
-
         }
     }
 }
